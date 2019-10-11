@@ -1,6 +1,7 @@
 import React from 'react';
 import Home from './components/Home'
 import Profile from './components/Profile'
+import Group from './components/Group'
 import MainAppBar from './components/MainAppBar'
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Amplify from 'aws-amplify';
@@ -14,6 +15,7 @@ function App() {
       <MainAppBar />
       <Route exact path="/" component={Home} />
       <Route path="/profile" component={Profile} />
+      <Route path="/groups" component={Group} />
     </Router>
   );
 }

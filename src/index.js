@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-
 import { ApolloProvider } from '@apollo/react-hooks'
 import { ApolloClient } from 'apollo-client';
 import { ApolloLink } from 'apollo-client-preset'
@@ -15,7 +14,7 @@ const httpLink = new HttpLink({
   })
   
   const middlewareAuthLink = new ApolloLink((operation, forward) => {
-    const token = localStorage.getItem('CognitoIdentityServiceProvider.4kllfac0ensrledet05qbs2dme.8eeb7a35-2b93-4c79-9032-300d42cdc5ba.idToken')
+    const token = localStorage.getItem('CognitoIdentityServiceProvider.4kllfac0ensrledet05qbs2dme.1677e7c2-28d4-4fbe-99b4-12f5b70946ca.idToken')
     const authorizationHeader = token
     operation.setContext({
       headers: {

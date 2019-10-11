@@ -39,7 +39,6 @@ export default function MainAppBar() {
   });
 
   const goTo = (route) => {
-      console.log(route)
     history.push(`/${route}`)
   }
 

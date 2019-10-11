@@ -2,8 +2,10 @@ import React from 'react';
 import logo from '../logo.svg';
 import '../App.css';
 import { Auth } from 'aws-amplify';
+import { useHistory } from "react-router"
 
 export default function Home() {
+  let history = useHistory()
     function signOut() {
       Auth.signOut()
       .then(data => console.log(data))
@@ -15,6 +17,9 @@ export default function Home() {
         bypassCache: false  // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
       }).then(user => console.log(user))
       .catch(err => console.log(err));
+    }
+    function createGroup() {
+      history.push(`/groups`)
     }
   
     return (
@@ -34,6 +39,7 @@ export default function Home() {
               </a>
               <button onClick={signOut}>Sign out</button>
               <button onClick={checkUser}>Check user</button>
+              <button onClick={createGroup}>CreateGroup</button>
             </header>
           </div>
     );
