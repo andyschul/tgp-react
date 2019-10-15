@@ -3,12 +3,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import Drawer from '@material-ui/core/Drawer';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -36,6 +34,7 @@ export default function MainAppBar() {
   const classes = useStyles();
   const [state, setState] = React.useState({
     left: false,
+    right: false,
   });
 
   const goTo = (route) => {
@@ -55,15 +54,24 @@ export default function MainAppBar() {
     setState({ ...state, [side]: open });
   };
 
-  const sideList = side => (
+  const leftList = () => (
     <div
       className={classes.list}
       role="presentation"
-      onClick={toggleDrawer(side, false)}
-      onKeyDown={toggleDrawer(side, false)}
+      onClick={toggleDrawer('left', false)}
+      onKeyDown={toggleDrawer('left', false)}
     >
       <TournamentList />
-      <Divider />
+    </div>
+  );
+
+  const rightList = () => (
+    <div
+      className={classes.list}
+      role="presentation"
+      onClick={toggleDrawer('right', false)}
+      onKeyDown={toggleDrawer('right', false)}
+    >
       <List>
         <ListItem button onClick={() => goTo('')}>
             <ListItemIcon><HomeIcon /></ListItemIcon>
@@ -89,12 +97,17 @@ export default function MainAppBar() {
             <MenuIcon />
           </IconButton>
           <Drawer open={state.left} onClose={toggleDrawer('left', false)}>
-            {sideList('left')}
+            {leftList()}
+          </Drawer>
+          <Drawer anchor="right" open={state.right} onClose={toggleDrawer('right', false)}>
+            {rightList()}
           </Drawer>
           <Typography variant="h6" className={classes.title}>
             News
           </Typography>
-          <Button color="inherit">Login</Button>
+          <IconButton onClick={toggleDrawer('right', true)} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+            <PersonIcon />
+          </IconButton>
         </Toolbar>
       </AppBar>
     </div>

@@ -48,7 +48,7 @@ function Profile() {
     const [updateUser] = useMutation(UPDATE_USER);
     if (loading) return 'Loading...';
     if (error) return `Error! ${error.message}`;
-    console.log(data)
+
     function handleSubmit(e) {
       e.preventDefault();
       updateUser({ variables: { firstName: data.user.firstName, lastName: data.user.lastName } });
@@ -86,7 +86,6 @@ function Profile() {
               id="first-name"
               label="First Name"
               margin="normal"
-              on
               className={classes.textField}
               value={data.user.firstName}
               onChange={handleFirstChange}
@@ -95,7 +94,6 @@ function Profile() {
               id="first-name"
               label="Last Name"
               margin="normal"
-              on
               className={classes.textField}
               value={data.user.lastName}
               onChange={handleLastChange}

@@ -1,6 +1,7 @@
 import React from 'react';
 import Home from './components/Home'
 import Profile from './components/Profile'
+import CreateGroup from './components/CreateGroup'
 import Group from './components/Group'
 import MainAppBar from './components/MainAppBar'
 import { BrowserRouter as Router, Route } from "react-router-dom";
@@ -15,7 +16,8 @@ function App() {
       <MainAppBar />
       <Route exact path="/" component={Home} />
       <Route path="/profile" component={Profile} />
-      <Route path="/groups" component={Group} />
+      <Route exact path="/groups" component={CreateGroup} />
+      <Route exact path="/groups/:id" component={Group} />
     </Router>
   );
 }

@@ -3,6 +3,7 @@ import logo from '../logo.svg';
 import '../App.css';
 import { Auth } from 'aws-amplify';
 import { useHistory } from "react-router"
+import GroupList from './GroupList'
 
 export default function Home() {
   let history = useHistory()
@@ -40,6 +41,7 @@ export default function Home() {
               <button onClick={signOut}>Sign out</button>
               <button onClick={checkUser}>Check user</button>
               <button onClick={createGroup}>CreateGroup</button>
+              <GroupList />
             </header>
           </div>
     );
