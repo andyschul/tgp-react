@@ -1,15 +1,19 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
+import TournamentList from './TournamentList'
+import InviteList from './InviteList'
 
 const GET_GROUP_DETAILS = gql`
   query GroupDetails($groupId: ID!) {
     group(id: $groupId) {
         id
         groupName
+        invites
         users {
             firstName
             lastName
+            role
         }
     }
   }
@@ -32,11 +36,19 @@ export default function Group(route) {
             <div>Test</div>
             <div>{data.group.groupName}</div>
             <div>Test</div>
+            {data.group.invites.map(email => (
+                <React.Fragment>
+                <div>{email}</div>
+                <button>remove</button>
+                </React.Fragment>
+            ))}
             <div>Test</div>
             <div>Test</div>
             {data.group.users.map(user => (
-                <div>{user.firstName} {user.lastName}</div>    
+                <div>{user.firstName} {user.lastName}, {user.role}</div>
             ))}
+            <TournamentList />
+            <InviteList groupId={route.match.params.id} />
         </div>
     )
 }

@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 import Drawer from '@material-ui/core/Drawer';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -10,12 +11,10 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import HomeIcon from '@material-ui/icons/Home';
 import PersonIcon from '@material-ui/icons/Person';
 import ExitToApp from '@material-ui/icons/ExitToApp';
 import { useHistory } from "react-router"
 import { Auth } from 'aws-amplify';
-import TournamentList from './TournamentList'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -33,7 +32,6 @@ export default function MainAppBar() {
   let history = useHistory()
   const classes = useStyles();
   const [state, setState] = React.useState({
-    left: false,
     right: false,
   });
 
@@ -61,7 +59,6 @@ export default function MainAppBar() {
       onClick={toggleDrawer('left', false)}
       onKeyDown={toggleDrawer('left', false)}
     >
-      <TournamentList />
     </div>
   );
 
@@ -73,10 +70,6 @@ export default function MainAppBar() {
       onKeyDown={toggleDrawer('right', false)}
     >
       <List>
-        <ListItem button onClick={() => goTo('')}>
-            <ListItemIcon><HomeIcon /></ListItemIcon>
-            <ListItemText primary='Home' />
-        </ListItem>
         <ListItem button onClick={() => goTo('profile')}>
             <ListItemIcon><PersonIcon /></ListItemIcon>
             <ListItemText primary='Profile' />
@@ -91,19 +84,13 @@ export default function MainAppBar() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="fixed" color="default">
+      <AppBar position="fixed" color="inherit">
         <Toolbar>
-          <IconButton onClick={toggleDrawer('left', true)} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-          <Drawer open={state.left} onClose={toggleDrawer('left', false)}>
-            {leftList()}
-          </Drawer>
           <Drawer anchor="right" open={state.right} onClose={toggleDrawer('right', false)}>
             {rightList()}
           </Drawer>
           <Typography variant="h6" className={classes.title}>
-            News
+           <Button onClick={() => goTo('')}>Home</Button>
           </Typography>
           <IconButton onClick={toggleDrawer('right', true)} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <PersonIcon />
